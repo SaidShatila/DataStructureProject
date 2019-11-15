@@ -32,18 +32,19 @@ public class Demo {
         Employee availableEmployee = government.getAvailableEmployee();
 
         Citizen zico = new Citizen();
+        //non conflict cde is added here to test the green color
         zico.setId(government.getArchive().getCitizenNewId());
         zico.setFirstName("Zico");
         zico.setLastName("Gringo");
         zico.setEmail("some@example.com");
         zico.setPhoneNumber("000 123 000");
-
+// so I am editing in this exact place to cause a conlict. Niyahahahahaha
         Application zicoApp = new Application();
         zicoApp.setId(government.getArchive().getApplicationNewId());
         zicoApp.setCitizenId(zico.getId());
         zicoApp.setType("Regular");
 
-        availableEmployee.registerApplication(government.getArchive(), zicoApp, zico);
+        availableEmployee.registerApplication(government.getArchive(), zicoApp, zico);//also here herere herher her ehr her
 
 
         Operation zicoOper = new Operation(zicoApp.getNextOperationId(), availableEmployee.getName(), "This is the first operation on this application");
