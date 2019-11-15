@@ -39,12 +39,13 @@ public class Demo {
         zico.setEmail("some@example.com");
         zico.setPhoneNumber("000 123 000");
 // so I am editing in this exact place to cause a conlict. Niyahahahahaha
+//We are editing this section to cause some conflict with the master branch
         Application zicoApp = new Application();
         zicoApp.setId(government.getArchive().getApplicationNewId());
         zicoApp.setCitizenId(zico.getId());
         zicoApp.setType("Regular");
 
-        availableEmployee.registerApplication(government.getArchive(), zicoApp, zico);//also here herere herher her ehr her
+        availableEmployee.registerApplication(government.getArchive(), zicoApp, zico); // this is solely for educational purposes
 
 
         Operation zicoOper = new Operation(zicoApp.getNextOperationId(), availableEmployee.getName(), "This is the first operation on this application");
