@@ -13,12 +13,12 @@ public class Archive {
     }
 
     public boolean isCitizenExist(Citizen c) {
-        for (CitizenRegisteration citizen : citizens) {
-            if (citizen.getCitizen().equals(c)) {
-                return true;
+            for (CitizenRegisteration citizen : citizens) {
+                if (citizen.getCitizen().equals(c)) {
+                    return true;
+                }
             }
-        }
-        return false;
+            return false;
     }
 
     public void unregisterCitizen(Citizen c) {
@@ -27,6 +27,14 @@ public class Archive {
                 citizens.remove(citizen);
             }
         }
+    }
+       public Citizen searchCitizen(int id ){
+        for (CitizenRegisteration citizen :citizens) {
+            if(citizen.getCitizen().getId()==id){
+                return citizen.getCitizen();
+            }
+        }
+        return  null;
     }
 
     public void applicationRegister(Application app, Citizen c, Employee e) {
