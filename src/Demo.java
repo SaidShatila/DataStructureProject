@@ -1,8 +1,10 @@
+import municipality.*;
+
 import java.util.ArrayList;
 
 public class Demo {
     public static void main(String[] args) {
-        Government government = new Government("Shatila's Government");
+        Government government = new Government("Shatila's municipality.Government");
         Employee said1 = new Employee();
         said1.setId(1);
         said1.setName("Said #1");

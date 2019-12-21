@@ -1,3 +1,5 @@
+package municipality;
+
 /**
  * This is a wrapper class that encapsulates the employee with its availability status
  * This is mainly used for the government in order t o keep track of which employee is available and which is not.

@@ -1,3 +1,5 @@
+package municipality;
+
 import java.util.ArrayList;
 
 public class Government {
@@ -5,7 +7,7 @@ public class Government {
     private Archive archive;
     private ArrayList<GovernmentEmployee> employeesList = new ArrayList<>();
 
-    Government(String governmentName) {
+    public Government(String governmentName) {
         this.governmentName = governmentName;
         this.archive = new Archive();
     }
@@ -25,7 +27,7 @@ public class Government {
                 return employee.getEmployee();
             }
         }
-        System.out.println("No Available Employee to assist you, thank you for your patience.");
+        System.out.println("No Available municipality.Employee to assist you, thank you for your patience.");
         return null;
     }
 

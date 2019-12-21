@@ -1,3 +1,5 @@
+package municipality;
+
 public class Citizen {
     private int id;
     private String firstName;
@@ -6,7 +8,7 @@ public class Citizen {
     private String phoneNumber;
 
 
-    Citizen() {
+    public Citizen() {
 
     }
 

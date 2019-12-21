@@ -1,3 +1,5 @@
+package municipality;
+
 import java.util.Stack;
 
 public class Application {
@@ -7,7 +9,7 @@ public class Application {
     private State state;
     private Stack<Operation> steps;
 
-    Application() {
+    public Application() {
         state = State.WAITING;
         steps = new Stack<>();
     }

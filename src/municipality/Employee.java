@@ -1,4 +1,4 @@
-import sun.security.krb5.internal.APOptions;
+package municipality;
 
 public class Employee {
     private String name;
@@ -53,7 +53,7 @@ public class Employee {
             application.undoStep();
         }
         if (application.isCompleted()) {
-            System.out.println("This Application is completed you can't undo next step");
+            System.out.println("This municipality.Application is completed you can't undo next step");
         }
     }
 
@@ -84,6 +84,6 @@ public class Employee {
     private String buildSMSText(String employeeName, String citizenName, int appid, String newState) {
         return "Dear " + citizenName + "\n"
                 + " your submitted application of id: " + appid + " is now in the: " + newState + " state." +
-                "\n" + "Sent by Employee: " + employeeName + "\n" + "Thank you for your patience.";
+                "\n" + "Sent by municipality.Employee: " + employeeName + "\n" + "Thank you for your patience.";
     }
 }

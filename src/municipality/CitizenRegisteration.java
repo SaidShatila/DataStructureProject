@@ -1,3 +1,5 @@
+package municipality;
+
 public class CitizenRegisteration {
     private Employee employee;
     private Citizen citizen;

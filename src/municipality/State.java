@@ -1,3 +1,5 @@
+package municipality;
+
 public enum State {
     WAITING(1),PROCESSING(2),COMPLETED(3);
     private int value;

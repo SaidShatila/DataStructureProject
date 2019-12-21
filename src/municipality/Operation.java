@@ -1,3 +1,5 @@
+package municipality;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -7,7 +9,7 @@ public class Operation {
     private Date timing;
     private String description;
 
-    Operation(String id, String processedBy, String description) {
+    public Operation(String id, String processedBy, String description) {
         timing = new Date();
         this.id = id;
         this.processedBy = processedBy;
