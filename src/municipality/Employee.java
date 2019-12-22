@@ -4,6 +4,8 @@ public class Employee {
     private String name;
     private int Id;
     private String position;
+    Archive archive;
+    Citizen citizen;
 
 
     public String getName() {
@@ -85,5 +87,15 @@ public class Employee {
         return "Dear " + citizenName + "\n"
                 + " your submitted application of id: " + appid + " is now in the: " + newState + " state." +
                 "\n" + "Sent by municipality.Employee: " + employeeName + "\n" + "Thank you for your patience.";
+    }
+
+    public boolean  registerCitizen(Citizen citizen){
+        if(archive.isCitizenExist(citizen)){
+            System.out.println("The Citizen is Already registered");
+            return false;
+        }
+        archive.registerCitizen(citizen,this);
+        return true;
+
     }
 }

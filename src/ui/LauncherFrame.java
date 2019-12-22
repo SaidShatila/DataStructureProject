@@ -1,5 +1,7 @@
 package ui;
 
+import municipality.Employee;
+import municipality.GovernmentHelper;
 import municipality.WaitTurnManager;
 
 import javax.swing.*;
@@ -116,7 +118,8 @@ public class LauncherFrame extends JFrame {
 
                 duration[0] -= stepSize;
                 if (duration[0] < 0) {
-                    EmployeeCounterFrame employeeCounterFrame = new EmployeeCounterFrame();
+                   Employee employee= GovernmentHelper.getCurrentGoverment().getAvailableEmployee();
+                    EmployeeCounterFrame employeeCounterFrame = new EmployeeCounterFrame(employee);
                     setVisible(false);
                     employeeCounterFrame.setVisible(true);
                     timer.stop();
