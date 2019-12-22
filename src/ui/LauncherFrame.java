@@ -9,6 +9,8 @@ import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import java.util.TimerTask;
+
 public class LauncherFrame extends JFrame {
     JPanel jPanel = new JPanel();
     JPanel waitTurnPanel = new JPanel();
@@ -18,7 +20,8 @@ public class LauncherFrame extends JFrame {
     JLabel waitMessageJlabel = new JLabel("Thank you for your patience.");
     JButton requestJButton = new JButton("Request Employee");
     WaitTurnManager waitTurnManager = new WaitTurnManager();
-
+    JLabel waitTimeJLabel = new JLabel();
+    Timer timer;
 
     public LauncherFrame() {
         titleJLabel.setFont(new Font("Serif", Font.BOLD, 25));
@@ -40,7 +43,9 @@ public class LauncherFrame extends JFrame {
         requestJButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+
                 requestEmployee();
+
             }
         });
 
@@ -57,10 +62,13 @@ public class LauncherFrame extends JFrame {
         Date date = new Date();
         String formattedDate = simpleDate.format(date);
         dateJlabel.setText("Date: " + formattedDate);
+
+
         waitingNumberJlabel.setText(" " + waitTurnManager.getNextTurn());
         if (waitTurnManager.getCurrentNum() == 100) {
             waitTurnManager.reset();
         }
+        startTimer();
 
     }
 
@@ -75,7 +83,7 @@ public class LauncherFrame extends JFrame {
         waitTurnPanel.add(dateJlabel);
 
 
-        waitingNumberJlabel.setFont(new Font("Serif", Font.PLAIN, 30));
+        waitingNumberJlabel.setFont(new Font("Dialog", Font.PLAIN, 30));
         waitingNumberJlabel.setHorizontalAlignment(SwingConstants.CENTER);
         waitTurnPanel.add(Box.createRigidArea(new Dimension(450, 0)));
         waitTurnPanel.add(waitingNumberJlabel);
@@ -86,6 +94,41 @@ public class LauncherFrame extends JFrame {
         waitTurnPanel.add(Box.createRigidArea(new Dimension(450, 0)));
         waitTurnPanel.add(waitMessageJlabel);
         waitTurnPanel.setVisible(false);
+
+
+        waitTimeJLabel.setFont(new Font("SanSerif", Font.PLAIN, 20));
+        waitTimeJLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        waitTurnPanel.add(Box.createRigidArea(new Dimension(450, 0)));
+        waitTurnPanel.add(waitTimeJLabel);
+        waitTurnPanel.setVisible(false);
     }
 
+    public void startTimer() {
+        if(timer!=null)
+          timer.stop();
+
+        final int[] duration = {randomTime() * 1000};
+        int stepSize = 1000;
+        timer = new Timer(stepSize, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                waitTimeJLabel.setText("Timer: " + (duration[0] / 1000) + " sec");
+
+                duration[0] -= stepSize;
+                if (duration[0] < 0) {
+                    EmployeeCounterFrame employeeCounterFrame = new EmployeeCounterFrame();
+                    setVisible(false);
+                    employeeCounterFrame.setVisible(true);
+                    timer.stop();
+                    timer=null;
+                }
+            }
+        });
+        timer.start();
+    }
+
+    public int randomTime() {
+        int x = (int) ((Math.random() * ((20 - 10) + 1)) + 10);
+        return x;
+    }
 }
