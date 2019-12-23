@@ -96,6 +96,14 @@ public class Application {
         this.state = state;
     }
 
+    public Stack<Operation> getSteps() {
+        return steps;
+    }
+
+    public void setSteps(Stack<Operation> steps) {
+        this.steps = steps;
+    }
+
     public String display() {
         String toBePrinted = "";
         Stack<Operation> temp = new Stack<>();

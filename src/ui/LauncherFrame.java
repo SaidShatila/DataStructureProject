@@ -1,5 +1,6 @@
 package ui;
 
+import localstorage.PreferenceHelper;
 import municipality.Employee;
 import municipality.GovernmentHelper;
 import municipality.WaitTurnManager;
@@ -59,19 +60,25 @@ public class LauncherFrame extends JFrame {
     }
 
     public void requestEmployee() {
-        waitTurnPanel.setVisible(true);
-        SimpleDateFormat simpleDate = new SimpleDateFormat("HH:mm dd/MM/yyyy");
-        Date date = new Date();
-        String formattedDate = simpleDate.format(date);
-        dateJlabel.setText("Date: " + formattedDate);
+        if(PreferenceHelper.getCurrentInstance().getSavedCitizen()!=null) {
 
 
-        waitingNumberJlabel.setText(" " + waitTurnManager.getNextTurn());
-        if (waitTurnManager.getCurrentNum() == 100) {
-            waitTurnManager.reset();
+            waitTurnPanel.setVisible(true);
+            SimpleDateFormat simpleDate = new SimpleDateFormat("HH:mm dd/MM/yyyy");
+            Date date = new Date();
+            String formattedDate = simpleDate.format(date);
+            dateJlabel.setText("Date: " + formattedDate);
+
+
+            waitingNumberJlabel.setText(" " + waitTurnManager.getNextTurn());
+            if (waitTurnManager.getCurrentNum() == 100) {
+                waitTurnManager.reset();
+            }
+            startTimer();
         }
-        startTimer();
-
+        else{
+//            saveNewCitizen();
+        }
     }
 
     private void createWaitNumberPanel() {
