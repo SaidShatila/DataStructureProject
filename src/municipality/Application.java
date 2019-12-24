@@ -5,10 +5,10 @@ import java.util.Stack;
 public class Application {
     private int id;
     private int citizenId;
-    private String type;
+    private BaseApplicationType type;
     private State state;
     private Stack<Operation> steps;
-
+    private Stack<Operation> pendingSteps;
     public Application() {
         state = State.WAITING;
         steps = new Stack<>();
@@ -80,12 +80,13 @@ public class Application {
         this.citizenId = citizenId;
     }
 
-    public String getType() {
+    public BaseApplicationType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(BaseApplicationType type) {
         this.type = type;
+        pendingSteps= type.getSteps(this);
     }
 
     public State getState() {
@@ -100,9 +101,11 @@ public class Application {
         return steps;
     }
 
-    public void setSteps(Stack<Operation> steps) {
-        this.steps = steps;
+    public Stack<Operation> getPendingSteps() {
+        return pendingSteps;
     }
+
+
 
     public String display() {
         String toBePrinted = "";

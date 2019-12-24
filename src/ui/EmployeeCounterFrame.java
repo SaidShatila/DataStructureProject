@@ -1,8 +1,7 @@
 package ui;
 
-import municipality.Employee;
-import municipality.Government;
-import municipality.GovernmentHelper;
+import localstorage.PreferenceHelper;
+import municipality.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,7 +15,9 @@ public class EmployeeCounterFrame extends JFrame {
     JButton backJButton = new JButton("Back");
     JButton registerCitizenJButton = new JButton("Register Citizen");
     Employee employee;
-
+    JComboBox typeOfAppComboBox = new JComboBox(new String[]{"PassPort","Birth Certificate","New Id","Personal Document"});
+    JPanel createApplicationJPanel = new JPanel();
+    Government governmentHelper= GovernmentHelper.getCurrentGoverment();
     public EmployeeCounterFrame(Employee employee) {
         this.employee = employee;
         jPanel.setLayout(new BoxLayout(jPanel, BoxLayout.Y_AXIS));
@@ -36,16 +37,21 @@ public class EmployeeCounterFrame extends JFrame {
             }
         });
 
+        createApplicationJPanel.setLayout(new FlowLayout());
+        createApplicationJPanel.add(typeOfAppComboBox);
+        createApplicationJPanel.add(createJButton);
+
         createJButton.setFont(new Font("Monospaced", Font.ITALIC, 20));
         createJButton.setHorizontalAlignment(SwingConstants.LEFT);
         jPanel.add(Box.createVerticalStrut(25));
-        jPanel.add(createJButton);
+        jPanel.add(createApplicationJPanel);
         createJButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 createApp();
             }
         });
+
 
 
         editJButton.setFont(new Font("Monospaced", Font.ITALIC, 20));
@@ -77,6 +83,26 @@ public class EmployeeCounterFrame extends JFrame {
     }
 
     public void createApp() {
+        BaseApplicationType applicationType;
+
+        switch ( typeOfAppComboBox.getSelectedItem().toString()){
+
+            case "PassPort":{
+                applicationType =new PassPortApplicationType();
+            }
+            break;
+            default:{
+                throw new IllegalArgumentException("Application type is not supported");
+            }
+        }
+        Application application = new Application();
+        application.setId(governmentHelper.getArchive().getApplicationNewId());
+        application.setCitizenId(PreferenceHelper.getCurrentInstance().getSavedCitizen().getId());
+        application.setType(applicationType);
+        application.setState(State.WAITING);
+        employee.registerApplication(governmentHelper.getArchive(),application,PreferenceHelper.getCurrentInstance().getSavedCitizen());
+
+
 
     }
 

@@ -46,7 +46,7 @@ private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/y
             public void saveApplication(Application application){
                     prefs.put("applicationId"+application.getId(),String.valueOf( application.getId()));
                     prefs.put("citizenId"+application.getId(),String.valueOf(application.getCitizenId()));
-                    prefs.put("typeOfApplication"+application.getId(),application.getType());
+                    prefs.put("typeOfApplication"+application.getId(),application.getType().stringValue());
                     prefs.put("stateOfApplication"+application.getId(),String.valueOf(application.getState().getValue()));
                     for(int i =0 ;!application.getSteps().isEmpty();i++){
                             saveApplicationSteps(application.getSteps().pop(),i,application.getId());

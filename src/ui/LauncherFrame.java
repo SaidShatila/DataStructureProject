@@ -60,7 +60,7 @@ public class LauncherFrame extends JFrame {
     }
 
     public void requestEmployee() {
-        if(PreferenceHelper.getCurrentInstance().getSavedCitizen()!=null) {
+        if(PreferenceHelper.getCurrentInstance().getSavedCitizen()==null) {
 
 
             waitTurnPanel.setVisible(true);

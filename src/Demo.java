@@ -45,7 +45,7 @@ public class Demo {
         Application zicoApp = new Application();
         zicoApp.setId(government.getArchive().getApplicationNewId());
         zicoApp.setCitizenId(zico.getId());
-        zicoApp.setType("Regular");
+        zicoApp.setType(new PassPortApplicationType());
 
         availableEmployee.registerApplication(government.getArchive(), zicoApp, zico); // this is solely for educational purposes
 
