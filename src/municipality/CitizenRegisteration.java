@@ -4,7 +4,7 @@ public class CitizenRegisteration {
     private Employee employee;
     private Citizen citizen;
 
-    CitizenRegisteration(Employee employee, Citizen citizen) {
+    public CitizenRegisteration(Employee employee, Citizen citizen) {
 this.employee=employee;
 this.citizen=citizen;
     }
