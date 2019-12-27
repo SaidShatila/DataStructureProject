@@ -56,11 +56,11 @@ public class LauncherFrame extends JFrame {
         setSize(450, 550);
         setVisible(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
+            adjustSize();
     }
 
     public void requestEmployee() {
-        if(PreferenceHelper.getCurrentInstance().getSavedCitizen()==null) {
+        if(PreferenceHelper.getCurrentInstance().getSavedCitizen()!=null) {
 
 
             waitTurnPanel.setVisible(true);
@@ -75,9 +75,13 @@ public class LauncherFrame extends JFrame {
                 waitTurnManager.reset();
             }
             startTimer();
+            adjustSize();
         }
         else{
-//            saveNewCitizen();
+            CitizenRegisterationFrame citizenRegisterationFrame = new CitizenRegisterationFrame();
+            setVisible(false);
+            citizenRegisterationFrame.setVisible(true);
+
         }
     }
 
@@ -135,6 +139,10 @@ public class LauncherFrame extends JFrame {
             }
         });
         timer.start();
+    }
+    public void adjustSize(){
+        pack();
+        setSize( (int) (getWidth()* 1.25),(int) (getHeight()* 1.25));
     }
 
     public int randomTime() {

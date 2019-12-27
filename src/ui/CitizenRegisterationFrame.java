@@ -1,5 +1,8 @@
 package ui;
 
+import localstorage.PreferenceHelper;
+import municipality.Citizen;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -81,44 +84,52 @@ public class CitizenRegisterationFrame extends JFrame {
         setSize(250, 75);
         setVisible(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        pack();
     }
 
 
     public void saveButtonConfig() {
 
-        toastMessage();
+            if(isErrorMessageShown()){
 
-        LauncherFrame launcherFrame = new LauncherFrame();
-        setVisible(false);
-        launcherFrame.setVisible(true);
+            }
+            else {
+                Citizen citizen = new Citizen();
+                citizen.setFirstName(firstNameTextField.getText());
+                citizen.setLastName(lastNameTextField.getText());
+                citizen.setEmail(emailTextField.getText());
+                citizen.setPhoneNumber(phoneNumberTextField.getText());
+                citizen.setId(1);
+                PreferenceHelper.getCurrentInstance().saveCitizen(citizen);
+
+                LauncherFrame launcherFrame = new LauncherFrame();
+                setVisible(false);
+                launcherFrame.setVisible(true);
+            }
     }
 
 
-
-    public JFrame toastMessage() {
-        JFrame jFrame = new JFrame();
-        JPanel jPanel = new JPanel();
-        JLabel jLabel = new JLabel();
-
-        jFrame.setContentPane(jPanel);
-        jFrame.add(jPanel);
-        jPanel.setLayout(new BorderLayout());
-        jPanel.add(jLabel, BorderLayout.CENTER);
-         jFrame.setVisible(false);
-        if (firstNameTextField.getText()=="") {
-            jFrame.setVisible(true);
-            jLabel.setText("Please enter your first name correctly");
-        } else if (lastNameTextField.getText() == "") {
-            jFrame.setVisible(true);
-            jLabel.setText("Please enter your last name correctly");
-        } else if (emailTextField.getText() == "") {
-            jFrame.setVisible(true);
-            jLabel.setText("Please enter your email correctly");
-        } else if (firstNameTextField.getText() == "") {
-            jFrame.setVisible(true);
-            jLabel.setText("Please enter your phone number correctly");
+    public boolean isErrorMessageShown() {
+        boolean isErrorMessageShown=false;
+        String errorMessage = "";
+        if (firstNameTextField.getText() .equals("")) {
+            errorMessage = "Please enter your first name correctly";
+            isErrorMessageShown=true;
+        } else if (lastNameTextField.getText().equals("")) {
+            isErrorMessageShown=true;
+            errorMessage = "Please enter your last name correctly";
+        } else if (emailTextField.getText().equals("")) {
+            isErrorMessageShown=true;
+            errorMessage = "Please enter your email correctly";
+        } else if (phoneNumberTextField.getText().equals("")) {
+            isErrorMessageShown=true;
+            errorMessage = "Please enter your phone number correctly";
         }
-        return jFrame;
+        if(!errorMessage.equals("")) {
+            JOptionPane.showMessageDialog(this, errorMessage, "Important", JOptionPane.WARNING_MESSAGE);
+        }
+
+        return isErrorMessageShown;
     }
 }
 

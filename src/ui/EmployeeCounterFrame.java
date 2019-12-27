@@ -80,6 +80,7 @@ public class EmployeeCounterFrame extends JFrame {
         setSize(450, 550);
         setVisible(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        pack();
     }
 
     public void createApp() {
