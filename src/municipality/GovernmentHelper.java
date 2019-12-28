@@ -16,16 +16,16 @@ public class GovernmentHelper {
     private GovernmentHelper() {
         Employee said1 = new Employee();
         said1.setId(1);
-        said1.setName("Said #1");
+        said1.setName("Employee #1");
         Employee said2 = new Employee();
         said2.setId(2);
-        said2.setName("Said #2");
+        said2.setName("Employee #2");
         Employee said3 = new Employee();
         said3.setId(3);
-        said3.setName("Said #3");
+        said3.setName("Employee #3");
         Employee said4 = new Employee();
         said4.setId(4);
-        said4.setName("Said #4");
+        said4.setName("Employee #4");
         ArrayList<Employee> employees = new ArrayList<>();
         employees.add(said1);
         employees.add(said2);

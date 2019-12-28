@@ -146,7 +146,7 @@ public class LauncherFrame extends JFrame {
     }
 
     public int randomTime() {
-        int x = (int) ((Math.random() * ((20 - 10) + 1)) + 10);
+        int x = (int) ((Math.random() * ((10 - 8) + 1)) + 8);
         return x;
     }
 }

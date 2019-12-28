@@ -15,9 +15,10 @@ public class EmployeeCounterFrame extends JFrame {
     JButton backJButton = new JButton("Back");
     JButton registerCitizenJButton = new JButton("Register Citizen");
     Employee employee;
-    JComboBox typeOfAppComboBox = new JComboBox(new String[]{"PassPort","Birth Certificate","New Id","Personal Document"});
+    JComboBox typeOfAppComboBox = new JComboBox(new String[]{"PassPort", "Birth Certificate", "New Id", "Personal Document"});
     JPanel createApplicationJPanel = new JPanel();
-    Government governmentHelper= GovernmentHelper.getCurrentGoverment();
+    Government governmentHelper = GovernmentHelper.getCurrentGoverment();
+
     public EmployeeCounterFrame(Employee employee) {
         this.employee = employee;
         jPanel.setLayout(new BoxLayout(jPanel, BoxLayout.Y_AXIS));
@@ -53,7 +54,6 @@ public class EmployeeCounterFrame extends JFrame {
         });
 
 
-
         editJButton.setFont(new Font("Monospaced", Font.ITALIC, 20));
         editJButton.setHorizontalAlignment(SwingConstants.RIGHT);
         jPanel.add(Box.createVerticalStrut(25));
@@ -86,13 +86,26 @@ public class EmployeeCounterFrame extends JFrame {
     public void createApp() {
         BaseApplicationType applicationType;
 
-        switch ( typeOfAppComboBox.getSelectedItem().toString()){
+        switch (typeOfAppComboBox.getSelectedItem().toString()) {
 
-            case "PassPort":{
-                applicationType =new PassPortApplicationType();
+            case "PassPort": {
+                applicationType = new PassPortApplicationType();
             }
             break;
-            default:{
+            case "Birth Certificate": {
+                applicationType = new BirthCertifcateType();
+            }
+            break;
+            case "New Id": {
+                applicationType = new IdType();
+            }
+            break;
+            case "Personal Document": {
+                applicationType = new PersonalDocumentType();
+            }
+            break;
+
+            default: {
                 throw new IllegalArgumentException("Application type is not supported");
             }
         }
@@ -101,8 +114,7 @@ public class EmployeeCounterFrame extends JFrame {
         application.setCitizenId(PreferenceHelper.getCurrentInstance().getSavedCitizen().getId());
         application.setType(applicationType);
         application.setState(State.WAITING);
-        employee.registerApplication(governmentHelper.getArchive(),application,PreferenceHelper.getCurrentInstance().getSavedCitizen());
-
+        employee.registerApplication(governmentHelper.getArchive(), application, PreferenceHelper.getCurrentInstance().getSavedCitizen());
 
 
     }
@@ -116,11 +128,20 @@ public class EmployeeCounterFrame extends JFrame {
     }
 
     public void editButton() {
-
+        String id = JOptionPane.showInputDialog(this, "Please enter the Id of the application");
+        Application application = governmentHelper.getArchive().getApplicationById(Integer.parseInt(id));
+        if ( application != null) {
+            EditApplicationFrame editApplicationFrame = new EditApplicationFrame(application,employee);
+            setVisible(false);
+            editApplicationFrame.setVisible(true);
+        }
+        else{
+            JOptionPane.showMessageDialog(this,"Application not Found");
+        }
     }
 
     public void registerCitizenButton() {
-       // employee.registerCitizen();
+//         employee.registerCitizen(PreferenceHelper.getCurrentInstance().getSavedCitizen());
 
     }
 }

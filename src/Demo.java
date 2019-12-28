@@ -7,7 +7,7 @@ public class Demo {
         Government government = new Government("Shatila's municipality.Government");
         Employee said1 = new Employee();
         said1.setId(1);
-        said1.setName("Said #1");
+        said1.setName("Ali Haidar");
         Employee said2 = new Employee();
         said2.setId(2);
         said2.setName("Said #2");
