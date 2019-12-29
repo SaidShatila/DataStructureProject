@@ -4,7 +4,7 @@ public class Employee {
     private String name;
     private int Id;
     private String position;
-    Archive archive;
+//    Archive archive;
     Citizen citizen;
 
 
@@ -90,11 +90,11 @@ public class Employee {
     }
 
     public boolean  registerCitizen(Citizen citizen){
-        if(archive.isCitizenExist(citizen)){
+        if(GovernmentHelper.getCurrentGoverment().getArchive().isCitizenExist(citizen)){
             System.out.println("The Citizen is Already registered");
             return false;
         }
-        archive.registerCitizen(citizen,this);
+        GovernmentHelper.getCurrentGoverment().getArchive().registerCitizen(citizen,this);
       return true;
 
     }

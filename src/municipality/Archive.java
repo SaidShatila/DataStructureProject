@@ -15,12 +15,12 @@ public class Archive {
     }
 
     public boolean isCitizenExist(Citizen c) {
-            for (CitizenRegisteration citizen : citizens) {
-                if (citizen.getCitizen().equals(c)) {
-                    return true;
-                }
+        for (CitizenRegisteration citizen : citizens) {
+            if (citizen.getCitizen().equals(c)) {
+                return true;
             }
-            return false;
+        }
+        return false;
     }
 
     public void unregisterCitizen(Citizen c) {
@@ -30,13 +30,14 @@ public class Archive {
             }
         }
     }
-       public Citizen searchCitizen(int id ){
-        for (CitizenRegisteration citizen :citizens) {
-            if(citizen.getCitizen().getId()==id){
+
+    public Citizen searchCitizen(int id) {
+        for (CitizenRegisteration citizen : citizens) {
+            if (citizen.getCitizen().getId() == id) {
                 return citizen.getCitizen();
             }
         }
-        return  null;
+        return null;
     }
 
     public void applicationRegister(Application app, Citizen c, Employee e) {
@@ -102,5 +103,29 @@ public class Archive {
 
         }
         return null;
+    }
+
+    public boolean applicationUnregister(int applicationId) {
+        Iterator<Application> iteratorCompletedApp = completedApplications.iterator();
+        while (iteratorCompletedApp.hasNext()) {
+            Application application = iteratorCompletedApp.next();
+            if (application.getId() == applicationId) {
+                iteratorCompletedApp.remove();
+                return true;
+            }
+
+        }
+
+        Iterator<Application> iteratorUncompletedApp = uncompletedApplications.iterator();
+        while (iteratorUncompletedApp.hasNext()) {
+            Application application = iteratorUncompletedApp.next();
+            if (application.getId() == applicationId) {
+                iteratorUncompletedApp.remove();
+                return true;
+            }
+
+
+        }
+        return false;
     }
 }

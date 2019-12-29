@@ -1,5 +1,6 @@
 package municipality;
 
+import java.util.ArrayList;
 import java.util.Stack;
 
 public class Application {
@@ -42,6 +43,7 @@ public class Application {
             throw new IllegalStateException("The application should be in the processing state");
         }
         steps.push(operation);
+        pendingSteps.pop();
 
     }
 
@@ -49,7 +51,9 @@ public class Application {
         if (state != State.PROCESSING) {
             throw new IllegalStateException("The application should be in the processing state");
         }
-        return steps.pop();
+       Operation stepPop=  steps.pop();
+         pendingSteps.push(stepPop);
+        return stepPop;
     }
 
     public boolean isInProcessing() {
@@ -105,6 +109,36 @@ public class Application {
         return pendingSteps;
     }
 
+public ArrayList<Operation> listOfSteps (){
+        ArrayList<Operation> operationsList = new ArrayList<>() ;
+        Stack<Operation>  temp = new Stack<>();
+
+          while (!steps.isEmpty()){
+              Operation popSteps= steps.pop();
+             temp.push(popSteps);
+             operationsList.add(popSteps);
+          }
+          while (!temp.isEmpty()){
+              steps.push(temp.pop());
+          }
+
+          return operationsList;
+}
+
+public ArrayList<Operation> listOfPendingSteps(){
+        ArrayList<Operation> operationsOfPendingList =new ArrayList<>();
+        Stack<Operation> temp = new Stack<>();
+
+        while (!pendingSteps.isEmpty()){
+            Operation popPendingSteps= pendingSteps.pop();
+            temp.push(popPendingSteps);
+            operationsOfPendingList.add(popPendingSteps);
+        }
+        while (!temp.isEmpty()){
+            pendingSteps.push(temp.pop());
+        }
+        return operationsOfPendingList;
+}
 
 
     public String display() {

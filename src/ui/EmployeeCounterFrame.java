@@ -61,7 +61,7 @@ public class EmployeeCounterFrame extends JFrame {
         editJButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                editButton();
+                editButton(true,null);
             }
         });
 
@@ -115,7 +115,7 @@ public class EmployeeCounterFrame extends JFrame {
         application.setType(applicationType);
         application.setState(State.WAITING);
         employee.registerApplication(governmentHelper.getArchive(), application, PreferenceHelper.getCurrentInstance().getSavedCitizen());
-
+        editButton(false,application);
 
     }
 
@@ -127,9 +127,15 @@ public class EmployeeCounterFrame extends JFrame {
 
     }
 
-    public void editButton() {
-        String id = JOptionPane.showInputDialog(this, "Please enter the Id of the application");
-        Application application = governmentHelper.getArchive().getApplicationById(Integer.parseInt(id));
+    public void editButton(boolean showDialog, Application passedApplication) {
+        Application application ;
+        if(showDialog) {
+            String id = JOptionPane.showInputDialog(this, "Please enter the Id of the application");
+            application = governmentHelper.getArchive().getApplicationById(Integer.parseInt(id));
+        }
+        else {
+            application=passedApplication;
+        }
         if ( application != null) {
             EditApplicationFrame editApplicationFrame = new EditApplicationFrame(application,employee);
             setVisible(false);
@@ -141,7 +147,10 @@ public class EmployeeCounterFrame extends JFrame {
     }
 
     public void registerCitizenButton() {
-//         employee.registerCitizen(PreferenceHelper.getCurrentInstance().getSavedCitizen());
+        if(  !employee.registerCitizen(PreferenceHelper.getCurrentInstance().getSavedCitizen())){
+            JOptionPane.showMessageDialog(this,"Citizen Already Registered");
+        }
+
 
     }
 }
