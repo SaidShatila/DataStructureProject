@@ -151,6 +151,6 @@ public class EmployeeCounterFrame extends JFrame {
             JOptionPane.showMessageDialog(this,"Citizen Already Registered");
         }
 
-
+            
     }
 }

@@ -122,7 +122,8 @@ public class EditApplicationFrame extends JFrame {
 
     public void nextProcessButton() {
         if (currentApplication.listOfPendingSteps().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "You can't proccess steps , your application is Finished");
+           employee.finishApplication(government.getArchive(),currentApplication.getId());
+
         } else {
 
 
